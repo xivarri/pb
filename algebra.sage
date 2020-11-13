@@ -1,5 +1,6 @@
-# Probability of winning each game.
+import numpy as np
 
+# Probability of winning each game.
 def ix(a, b):
     return b + 3 * a
 
@@ -40,4 +41,14 @@ vals = [
 # Probabilities assuming an equilibrium exists.
 ban_eqs = [vals[0] == vals[1], vals[0] == vals[2], sum(p1_bans) == 1]
 
-print(solve(match_eqs + ban_eqs, *(p1_bans + matches), solution_dict=True))
+def get_game_prob_eqs():
+    ret = []
+    matrix = np.array([[16,5,6],[3,6,8],[2,13,4]]) / 16
+    for i in range(3):
+        for j in range(3):
+            ret.append(games[ix(i, j)] == matrix[i, j])
+    return ret
+
+print(solve(match_eqs + ban_eqs + get_game_prob_eqs(),
+            *(p1_bans + matches + games),
+            solution_dict=True))
