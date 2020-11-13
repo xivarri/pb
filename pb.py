@@ -1,5 +1,7 @@
 import random
 
+from fractions import Decimal
+
 def match_probs(a1, a2, b1, b2):
     """Convert game probs into starting game match probs."""
     return (
@@ -45,4 +47,4 @@ def pick_and_win_prob(a1, a2, b1, b2):
 
 def pick_and_win_prob_for_game_probs(game_probs):
     """Call with game probs, e.g. (0.5, 0.4, 0.6, 0.2)"""
-    return pick_and_win_prob(*match_probs(*game_probs))
+    return pick_and_win_prob(*match_probs(*map(Decimal, game_probs)))
