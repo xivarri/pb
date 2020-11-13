@@ -39,3 +39,5 @@ vals = [
     for j in range(3)]
 # Probabilities assuming an equilibrium exists.
 ban_eqs = [vals[0] == vals[1], vals[0] == vals[2], sum(p1_bans) == 1]
+
+print(solve(match_eqs + ban_eqs, *(p1_bans + matches), solution_dict=True))
